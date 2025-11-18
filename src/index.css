@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-50 font-sans;
+}
+
+select option {
+  background-color: white;
+  color: rgb(15 23 42); /* slate-900 */
+}
+
+.dark select option,  .dark select, .dark button, .dark input, .dark textarea {
+  /* background-color: rgb(15 23 42); slate-900 */
+  color: rgb(248 250 252); /* slate-50 */
+}
+
+.dark select option,  .dark select {
+  background-color: rgb(15 23 42); /* slate-900 */
+}
