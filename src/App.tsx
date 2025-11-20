@@ -7,52 +7,60 @@ import TransactionHistory from "./components/TransactionHistory";
 
 export type AccountId = "main" | "savings";
 
+// Interface describing a bank account
 export interface Account {
-  id: AccountId;
-  name: string;
-  label: string;
-  balance: number;
+  id: AccountId; // Unique account ID
+  name: string; // Full name displayed to user
+  label: string; // Short description
+  balance: number; // Current balance of the account
 }
 
 export type TransactionType = "deposit" | "withdraw" | "transfer";
 
+// Interface for a single transaction history entry
 export interface Transaction {
-  id: string;
-  type: TransactionType;
-  amount: number;
-  timestamp: string;
-  source?: AccountId;
-  target?: AccountId;
+  id: string; // Unique transaction ID
+  type: TransactionType; // Deposit / withdraw / transfer
+  amount: number; // Amount of money involved
+  timestamp: string; // Date of transaction
+  source?: AccountId; // Source account (for withdraw/transfer)
+  target?: AccountId; // Target account (for deposit/transfer)
 }
 
+// Structure of global ATM state
 interface ATMState {
-  accounts: Record<AccountId, Account>;
-  transactions: Transaction[];
+  accounts: Record<AccountId, Account>; // Stored accounts
+  transactions: Transaction[]; // Transaction list
 }
-
+// All allowed reducer actions
+// Each variant describes required data fields
 type ATMAction =
   | { type: "deposit"; accountId: AccountId; amount: number }
   | { type: "withdraw"; accountId: AccountId; amount: number }
   | { type: "transfer"; from: AccountId; to: AccountId; amount: number };
 
+// Initial ATM state with predefined accounts
 const initialState: ATMState = {
   accounts: {
     main: {
       id: "main",
       name: "Main account",
       label: "Daily spending",
-      balance: 1200,
+      // balance: 1200,
+      balance: 0,
     },
     savings: {
       id: "savings",
       name: "Savings account",
       label: "Long term savings",
-      balance: 4500,
+      // balance: 4500,
+      balance: 0,
     },
   },
   transactions: [],
 };
 
+// formats number into currency string
 function formatCurrency(amount: number): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -61,15 +69,17 @@ function formatCurrency(amount: number): string {
   }).format(amount);
 }
 
+// Main reducer controlling all ATM state updates
 function atmReducer(state: ATMState, action: ATMAction): ATMState {
   switch (action.type) {
     case "deposit": {
       const account = state.accounts[action.accountId];
+      // Create updated account with new balance
       const updatedAccount: Account = {
         ...account,
         balance: account.balance + action.amount,
       };
-
+      // Create new transaction entry
       const tx: Transaction = {
         id: `${Date.now()}-${Math.random()}`,
         type: "deposit",
@@ -77,7 +87,7 @@ function atmReducer(state: ATMState, action: ATMAction): ATMState {
         timestamp: new Date().toISOString(),
         target: action.accountId,
       };
-
+      // Return updated state with new account and transaction
       return {
         accounts: {
           ...state.accounts,
@@ -149,11 +159,13 @@ function atmReducer(state: ATMState, action: ATMAction): ATMState {
 }
 
 const App: React.FC = () => {
+  // Global state managed via reducer
   const [state, dispatch] = useReducer(atmReducer, initialState);
+  // Controls UI theme mode
   const [darkMode, setDarkMode] = useState(true);
-
+  // Extract state values for convenience
   const { accounts, transactions } = state;
-
+  // Handlers wrapping dispatch calls
   const handleDeposit = (accountId: AccountId, amount: number) => {
     dispatch({ type: "deposit", accountId, amount });
   };
@@ -167,14 +179,17 @@ const App: React.FC = () => {
   };
 
   return (
+    /* Background wrapper */
     <div className={darkMode ? "dark h-full" : "h-full"}>
       <div className="min-h-screen bg-atm-gradient bg-slate-100 dark:bg-slate-950 transition-colors duration-300 flex items-center justify-center px-4 py-6">
+        {/* Main animated card container */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 120, damping: 18 }}
           className="w-full max-w-5xl rounded-3xl bg-white/80 dark:bg-slate-900/80 shadow-2xl backdrop-blur-xl border border-white/20 dark:border-slate-800/60 p-6 sm:p-8"
         >
+          {/* Header area with theme toggle */}
           <div className="flex items-center justify-between gap-4 mb-6">
             <div>
               <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">
@@ -184,7 +199,7 @@ const App: React.FC = () => {
                 Manage your Main &amp; Savings accounts in one place.
               </p>
             </div>
-
+            {/* Theme switcher button */}
             <motion.button
               whileTap={{ scale: 0.9 }}
               whileHover={{ scale: 1.05 }}
@@ -206,7 +221,7 @@ const App: React.FC = () => {
               </span>
             </motion.button>
           </div>
-
+          {/* Account overview cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
             <AccountCard
               account={accounts.main}
@@ -217,7 +232,7 @@ const App: React.FC = () => {
               formatCurrency={formatCurrency}
             />
           </div>
-
+          {/* Left side: deposit/withdraw + transfer modules */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 items-start">
             <div className="lg:col-span-2 space-y-4 sm:space-y-6">
               <OperationPanel
@@ -227,7 +242,7 @@ const App: React.FC = () => {
               />
               <TransferPanel accounts={accounts} onTransfer={handleTransfer} />
             </div>
-
+            {/* Right side: transaction history */}
             <TransactionHistory
               accounts={accounts}
               transactions={transactions}

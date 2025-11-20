@@ -17,7 +17,7 @@ select option {
   color: rgb(15 23 42); /* slate-900 */
 }
 
-.dark select option,  .dark select, .dark button, .dark input, .dark textarea {
+.dark select option,  .dark select, .dark button, .dark input, .dark textarea, .dark h1, .dark h3, .dark span {
   /* background-color: rgb(15 23 42); slate-900 */
   color: rgb(248 250 252); /* slate-50 */
 }
