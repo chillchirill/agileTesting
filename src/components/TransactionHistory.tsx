@@ -38,8 +38,8 @@ const TransactionHistory: React.FC<Props> = ({
           No transactions yet. Make your first deposit, withdrawal or transfer.
         </p>
       ) : (
-        <div className="space-y-2 overflow-y-scroll max-h-72 h-72 pr-1 dark-scrollbar">
-          <AnimatePresence  data-testid="history-list" initial={false}>
+        <div className="space-y-2 overflow-y-scroll max-h-72 h-72 pr-1 dark-scrollbar " data-testid="history-list">
+          <AnimatePresence initial={false}>
             {transactions.map((tx) => {
               const date = new Date(tx.timestamp);
               const timeLabel = date.toLocaleTimeString(undefined, {
@@ -60,6 +60,7 @@ const TransactionHistory: React.FC<Props> = ({
 
               return (
                 <motion.div
+                
                   key={tx.id}
                   layout
                   initial={{ opacity: 0, y: 10, scale: 0.98 }}
