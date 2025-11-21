@@ -69,6 +69,7 @@ const TransferPanel: React.FC<Props> = ({ accounts, onTransfer }) => {
             From
           </label>
           <select
+            data-testid="transfer-from"
             value={fromAccount}
             onChange={(e) => setFromAccount(e.target.value as AccountId)}
             className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-sky-500"
@@ -98,6 +99,7 @@ const TransferPanel: React.FC<Props> = ({ accounts, onTransfer }) => {
             To
           </label>
           <select
+            data-testid="transfer-to"
             value={toAccount}
             onChange={(e) => setToAccount(e.target.value as AccountId)}
             className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-sky-500"
@@ -117,6 +119,7 @@ const TransferPanel: React.FC<Props> = ({ accounts, onTransfer }) => {
             Amount
           </label>
           <input
+            data-testid="transfer-amount"
             type="number"
             min="0"
             step="0.01"
@@ -129,6 +132,7 @@ const TransferPanel: React.FC<Props> = ({ accounts, onTransfer }) => {
 
         <div className="flex items-end">
           <motion.button
+            data-testid="transfer-btn"
             type="button"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.95 }}

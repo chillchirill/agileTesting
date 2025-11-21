@@ -75,6 +75,7 @@ const OperationPanel: React.FC<Props> = ({
             Account
           </label>
           <select
+            data-testid="operation-account-select"
             value={selectedAccount}
             onChange={(e) => setSelectedAccount(e.target.value as AccountId)}
             className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-sky-500"
@@ -89,6 +90,7 @@ const OperationPanel: React.FC<Props> = ({
             Amount
           </label>
           <input
+            data-testid="operation-amount-input"
             type="number"
             min="0"
             step="0.01"
@@ -101,6 +103,7 @@ const OperationPanel: React.FC<Props> = ({
 
         <div className="flex flex-col sm:flex-row gap-2 sm:items-end mt-1 sm:mt-0">
           <motion.button
+            data-testid="deposit-btn"
             type="button"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.95 }}
@@ -110,6 +113,7 @@ const OperationPanel: React.FC<Props> = ({
             Deposit
           </motion.button>
           <motion.button
+            data-testid="withdraw-btn"
             type="button"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.95 }}

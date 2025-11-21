@@ -25,3 +25,25 @@ select option {
 .dark select option,  .dark select {
   background-color: rgb(15 23 42); /* slate-900 */
 }
+
+.dark .dark-scrollbar {
+  /* scrollbar-width: thin; */
+  scrollbar-color: #6b7280 rgb(15, 23, 42 );
+}
+
+/* .dark-scrollbar::-webkit-scrollbar {
+  width: 8px;
+} */
+
+.dark .dark-scrollbar::-webkit-scrollbar-track {
+  background: rgb(15, 23, 42 );
+}
+
+.dark .dark-scrollbar::-webkit-scrollbar-thumb {
+  background: #6b7280; /* gray-500 */
+  /* border-radius: 4px; */
+}
+
+.dark .dark-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af; /* gray-400 */
+}

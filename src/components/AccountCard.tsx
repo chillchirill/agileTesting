@@ -28,7 +28,7 @@ const AccountCard: React.FC<Props> = ({ account, formatCurrency }) => {
           <p className="text-[10px] uppercase tracking-[0.2em] text-sky-100/70">
             Balance
           </p>
-          <p className="text-xl sm:text-2xl font-semibold">
+          <p data-testid={`balance-${account.id}`} className="text-xl sm:text-2xl font-semibold">
             {formatCurrency(account.balance)}
           </p>
         </div>
