@@ -101,8 +101,11 @@ withdraw-btn - button to burn (withdraw) money to the selected account
 
 ### Second form section
 transfer-from - select with account selection
+
 transfer-to - select with account selection
+
 transfer-amount - input for transfering money between accounts
+
 transfer-btn - confirm transaction button
 
 ### history-list - div element in which childs are action logs. 
