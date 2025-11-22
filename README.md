@@ -110,6 +110,19 @@ transfer-btn - confirm transaction button
 
 ### history-list - div element in which childs are action logs. 
 Only the last 10 actions are displayed
+
+## Excel format of testing
+The first ceil contains name of test and additional information. This will be visible in cypress. Everything else in the first line is Excel comments.
+
+The next row contains test-ids. 
+
+Next other rows are parameters for actions or verifying. If the action is with an html element without a parameter, then the value is TRUE. If the check is going to be performed, then the expected value is indicated in the cell.
+
+All actions are performed from left to right and after performing the actions, it goes to the next line. 
+
+I recommend doing each input action on a new line, and checking the content on one line.
+
+**IMPORTANT** if there is an empty line, then this will be considered the beginning of a new test. And re-enter the service data and test-ids.
 ## Contact
 
 To request edit access, send me a message with your email address so I can add you:
