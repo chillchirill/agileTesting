@@ -2,6 +2,7 @@
 ATM frontend
 
 
+
 # Project Setup Instructions
 
 ## 📦 Install Dependencies
@@ -9,13 +10,13 @@ ATM frontend
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/USERNAME/REPOSITORY.git
+   git clone https://github.com/chillchirill/agileTesting.git
    ```
 
 2. **Navigate into the project folder:**
 
    ```bash
-   cd project-folder
+   cd agileTesting
    ```
 
 3. **Check if Node.js is installed:**
@@ -39,13 +40,13 @@ ATM frontend
 ## 🚀 Run React Development Server
 
 ```bash
-npm start
+npm run dev
 ```
 
 The app will be available at:
 
 ```
-http://localhost:3000
+http://localhost:5173/
 ```
 
 ---
@@ -63,3 +64,11 @@ Then:
 ```bash
 npm run dev
 ```
+
+
+## Contact
+
+To request edit access, send me a message with your email address so I can add you:
+
+- **WhatsApp:** +380982951127
+- **Email:** kirilltonkovid@gmail.com
